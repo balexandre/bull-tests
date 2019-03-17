@@ -5,16 +5,19 @@ const Bull = require("bull");
 const { REDIS, QUEUE_NAME } = process.env;
 const queue = new Bull(QUEUE_NAME, REDIS);
 
+// const jobCount = process.argv && process.argv.length > 1 ? parseInt(process.argv[2], 10) : 1;
+// console.log('jobCount says:', jobCount);
+
+const jobCount = 1;
+const campaignId = process.argv && process.argv.length > 1 ? parseInt(process.argv[2], 10) : 1;
+console.log('jobCount says:', campaignId);
+
 // add campaign to queue so the fetch can be perform
-const task = {
-  campaign: 170,
-  segment: 0
-};
-for (let i = 0; i < 20; i += 1)
+for (let i = 0; i < jobCount; i += 1)
   queue
     .add(
       {
-        campaign: 170 + i,
+        campaign: campaignId + i,
         segment: 0
       },
       { priority: 2 }
