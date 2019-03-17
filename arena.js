@@ -22,5 +22,5 @@ router.use('/', arena);
 app.use(router);
 
 app.listen(ARENA_PORT, () => {
-  console.log('running on http://localhost:5001', process.env.DB_HOST);
+  console.log('running on http://localhost:' + ARENA_PORT);
 });
